@@ -1,0 +1,22 @@
+version: '2'
+
+networks:
+  mongodb-tier:
+    driver: bridge
+services:
+  mongodb:
+    image: 'bitnami/mongodb:latest'
+    restart: always
+    ports:
+      - "27017:27017"
+    env_file:
+      - .env
+    environment:
+      MYSQL_ROOT_PASSWORD: $MONGODB_ROOT_PASSWORD
+      MONGODB_USERNAME: $MONGODB_USERNAME
+      MONGODB_PASSWORD: $MONGODB_PASSWORD
+      MONGODB_DATABASE: $MONGODB_DATABASE
+    networks:
+      - mongodb-tier
+    volumes:
+      - ./mongodb:/bitnami
