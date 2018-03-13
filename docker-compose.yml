@@ -5,7 +5,7 @@ networks:
     driver: bridge
 services:
   mongodb:
-    image: 'bitnami/mongodb:latest'
+    image: "bitnami/mongodb:latest"
     restart: always
     ports:
       - "27017:27017"
@@ -20,3 +20,11 @@ services:
       - mongodb-tier
     volumes:
       - ./mongodb:/bitnami
+  mongodb_test:
+    image: 'bitnami/mongodb:latest'
+    ports: 
+      - "27018:27017"
+    volumes:
+      - ./mongodb_test:/bitnami
+    networks:
+      - mongodb-tier
